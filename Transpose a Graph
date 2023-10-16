@@ -1,0 +1,67 @@
+Problem Statement:
+Implement a function that takes a directed graph as input and print its transpose.
+
+CODE:-
+main.java:-
+class Transpose {
+ public static void getTranspose(Graph g) {
+  int num_of_vertices = g.getVertices(); //getVertices defined in Graph.java file
+
+  Graph transposedGraph = new Graph(num_of_vertices); //new graph to store the transpose
+
+  //Write your code here
+
+  transposedGraph.printGraph(); //calling print function on the final transposed graph
+ }
+}
+
+Graph.java:-
+import java.io.*;
+import java.util.*;
+
+class Graph {
+ private int vertices; //number of vertices 
+ private LinkedList < Integer > adjacencyList[]; //Adjacency Lists 
+ @SuppressWarnings("unchecked")
+ // Constructor 
+ Graph(int vert) {
+  this.vertices = vert;
+  this.adjacencyList = new LinkedList[vertices];
+  for (int i = 0; i < this.vertices; ++i)
+   this.adjacencyList[i] = new LinkedList();
+ }
+
+ // Function to add an edge into the graph 
+ void addEdge(int source, int destination) {
+  this.adjacencyList[source].add(destination);
+ }
+
+ public int getVertices() {
+  return this.vertices;
+ }
+
+ public LinkedList < Integer > [] getAdj() {
+  return this.adjacencyList;
+ }
+
+ void printGraph() {
+
+  for (int v = 0; v < this.vertices; v++) {
+   System.out.print(v);
+   for (Integer pCrawl: this.adjacencyList[v]) {
+    System.out.print("->" + pCrawl);
+   }
+   System.out.print("\n");
+  }
+ }
+};
+
+
+Solution Breakdown:
+
+Time Complexity: O(V+E)
+
+First, you make another graph and start reversing it. Traverse the adjacency list of the given graph. When the program finds a vertex v in the adjacency list of vertex u (i.e., an edge from u to v in the given graph), add an edge from v to u in the transposedGraph, adding u in the adjacency list of vertex v of the new graph) (lines 9-13).
+
+In line 19, the printGraph() function prints the graph to console. You can find its implementation in Graph.java file (lines 29-36).
+
